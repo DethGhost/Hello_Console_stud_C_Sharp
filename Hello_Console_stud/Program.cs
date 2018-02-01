@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 
 namespace Hello_Console_stud
@@ -68,17 +69,47 @@ namespace Hello_Console_stud
         {
             //Implement positive integer variable input
 
+            Console.WriteLine("Enter some nuber to convert it to binary representation");
             //Present it like binary string
             //   For example, 4 as 100
+            int x = 0;
+            try
+            {
+                x = Int32.Parse(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Oooops somes going wrong");
+                My_Binary();
+            }
 
+            string result = DecToBinConvertation(x);
+            
+            Console.WriteLine("You enter {0} and it binary value is - {1}", x, result);
             //Use modulus operator to obtain the remainder  (n % 2) 
             //and divide variable by 2 in the loop
-
+            char[] ch = result.ToCharArray();
             //Use the ToCharArray() method to transform string to chararray
             //and Array.Reverse() method
+            ch.Reverse();
+            Console.WriteLine(ch);
         }
 
         #endregion
+
+        static string DecToBinConvertation(int num)
+        {
+            int remainder;
+            string result = string.Empty;
+            while (num > 0)
+            {
+                remainder = num % 2;
+                num /= 2;
+                result = remainder.ToString() + result;
+            }
+            
+            return result;
+        }
 
         #region ToFromUnary
 
